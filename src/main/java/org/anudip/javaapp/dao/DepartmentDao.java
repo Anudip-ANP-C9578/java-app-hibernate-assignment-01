@@ -17,4 +17,16 @@ public interface DepartmentDao {
 	 * This method must insert multiple departments in the table.
 	 */
 	public String insertDepartments(HashSet<Department> departmentsSet);
+	/*
+	 * This method must update head of a department in the table on the basis of department id.
+	 */
+	public String updateDepartmentHead(int departmentId);
+	/*
+	 * This method must delete a department from the table on the basis of department id.
+	 */
+	public String deleteDepartmentById(int departmentId);
+	/*
+	 * This method must retrieve a department record from the table on the basis of department id.
+	 */
+	public Department selectDepartmentById(int departmentId);
 }
