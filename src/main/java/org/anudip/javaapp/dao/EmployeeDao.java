@@ -13,6 +13,7 @@ public interface EmployeeDao {
 	 * This method must insert an employee in the table.
 	 */
 	public String insertEmployee(Employee employee);
+
 	/*
 	 * This method must insert multiple employees in the table.
 	 */

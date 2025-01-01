@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.anudip.javaapp.entity.Employee" table="employee">
+		<id name="employeeId" column="emp_id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="firstName" column="first_name"></property>
+		<property name="lastName" column="last_name"></property>
+		<property name="dateOfJoining" column="date_of_joining"></property>
+	</class>
+</hibernate-mapping>

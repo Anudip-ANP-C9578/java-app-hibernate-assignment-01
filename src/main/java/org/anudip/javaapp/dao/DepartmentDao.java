@@ -13,6 +13,7 @@ public interface DepartmentDao {
 	 * This method must insert a department in the table.
 	 */
 	public String insertDepartment(Department department);
+
 	/*
 	 * This method must insert multiple departments in the table.
 	 */
