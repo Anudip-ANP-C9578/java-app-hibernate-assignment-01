@@ -7,9 +7,9 @@ public class Department {
 	private int departmentId;
 	private String departmentName;
 	private String head;
-	
+
 	public Department() {
-		
+
 	}
 
 	public Department(int departmentId, String departmentName, String head) {
@@ -18,7 +18,7 @@ public class Department {
 		this.departmentName = departmentName;
 		this.head = head;
 	}
-	
+
 	public Department(String departmentName, String head) {
 		this.departmentName = departmentName;
 		this.head = head;
@@ -47,7 +47,5 @@ public class Department {
 	public void setHead(String head) {
 		this.head = head;
 	}
-	
-	
 
 }
