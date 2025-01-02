@@ -1,6 +1,5 @@
 package org.anudip.javaapp.entity;
 
-// Entity class
 public class Department {
 	private int departmentId;
 	private String name;
@@ -19,7 +18,6 @@ public class Department {
 
 	// Parameterized Constructor with parameters name, head.
 	public Department(String name, String head) {
-		super();
 		this.name = name;
 		this.head = head;
 	}

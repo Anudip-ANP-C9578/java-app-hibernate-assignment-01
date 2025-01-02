@@ -1,18 +1,20 @@
 package org.anudip.javaapp.entity;
 
-//Entity class
+import java.util.Date;
+import java.util.Calendar;
+
 public class Employee {
 	private int employeeId;
 	private String firstName;
 	private String lastName;
-	private String dateOfJoining;
+	private Date dateOfJoining;
 
 	// Blank Constructor
 	public Employee() {
 	}
 
 	// Parameterized Constructor with all parameters.
-	public Employee(int employeeId, String firstName, String lastName, String dateOfJoining) {
+	public Employee(int employeeId, String firstName, String lastName, Date dateOfJoining) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -20,7 +22,7 @@ public class Employee {
 	}
 
 	// Parameterized Constructor with parameters firstName, lastName, dateOfJoining
-	public Employee(String firstName, String lastName, String dateOfJoining) {
+	public Employee(String firstName, String lastName, Date dateOfJoining) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfJoining = dateOfJoining;
@@ -39,7 +41,7 @@ public class Employee {
 		return lastName;
 	}
 
-	public String getDateOfJoining() {
+	public Date getDateOfJoining() {
 		return dateOfJoining;
 	}
 
@@ -55,7 +57,7 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-	public void setDateOfJoining(String dateOfJoining) {
+	public void setDateOfJoining(Date dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 
