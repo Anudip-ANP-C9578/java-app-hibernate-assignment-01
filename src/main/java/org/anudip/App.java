@@ -52,8 +52,8 @@ public class App {
 		}
 
 		// Insert multiple departments
-		Department dept3 = new Department(4, "Retail", "Adam");
-		Department dept4 = new Department(5, "Manager", "Ewe");
+		Department dept3 = new Department(5, "Retail", "Adam");
+		Department dept4 = new Department(6, "Manager", "Ewe");
 
 		HashSet<Department> departmentsSet = new HashSet<Department>();
 		departmentsSet.add(dept3);
