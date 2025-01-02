@@ -13,23 +13,23 @@ public interface EmployeeDao {
 	/*
 	 * This method must insert an employee in the table.
 	 */
-	public String insertEmployee(Employee employee);
+	public boolean insertEmployee(Employee employee);
 	/*
 	 * This method must insert multiple employees in the table.
 	 */
-	public String insertEmployees(HashSet<Employee> employeesSet);
+	public boolean insertEmployees(HashSet<Employee> employeesSet);
 	/*
 	 * This method must update last name of an employee in the table on the basis of employee id.
 	 */
-	public String updateEmployeeLastName(int employeeId, String lastName);
+	public boolean updateEmployeeLastName(int employeeId, String lastName);
 	/*
 	 * This method must update date of joining of an employee in the table on the basis of employee id.
 	 */
-	public String updateEmployeeDateOfJoining(int employeeId, Calendar dateOfJoining);
+	public boolean updateEmployeeDateOfJoining(int employeeId, String dateOfJoining);
 	/*
 	 * This method must delete an employee from the table on the basis of employee id.
 	 */
-	public String deleteEmployeeById(int employeeId);
+	public boolean deleteEmployeeById(int employeeId);
 	/*
 	 * This method must retrieve an employee record from the table on the basis of employee id.
 	 */
