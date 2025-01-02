@@ -1,4 +1,5 @@
 package org.anudip.javaapp.dao;
+import org.anudip.javaapp.dao.DepartmentDao;
 
 import org.anudip.javaapp.entity.Department;
 import org.hibernate.Session;
@@ -13,43 +14,66 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private SessionFactory sessionFactory;
 
     public DepartmentDaoImpl() {
-        // Configure Hibernate session factory for Department entity
-        sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Department.class).buildSessionFactory();
+        sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
     }
 
     @Override
     public String insertDepartment(Department department) {
-        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.save(department); // Save the department entity
+            Transaction transaction = session.beginTransaction();
+            session.save(department);
             transaction.commit();
             return "Department inserted successfully.";
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback(); // Rollback only if the transaction is active
-            }
-            e.printStackTrace();
-            return "Error inserting department: " + e.getMessage();
         }
     }
 
     @Override
     public String insertDepartments(HashSet<Department> departmentsSet) {
-        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
+            Transaction transaction = session.beginTransaction();
             for (Department department : departmentsSet) {
-                session.save(department); // Save each department in the set
+                session.save(department);
             }
             transaction.commit();
             return "All departments inserted successfully.";
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback(); // Rollback only if the transaction is active
+        }
+    }
+
+    @Override
+    public String updateDepartmentHead(int departmentId, String newHead) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Department department = session.get(Department.class, departmentId);
+            if (department != null) {
+                department.setHead(newHead);
+                session.update(department);
+                transaction.commit();
+                return "Department head updated successfully.";
+            } else {
+                return "Department not found.";
             }
-            e.printStackTrace();
-            return "Error inserting departments: " + e.getMessage();
+        }
+    }
+
+    @Override
+    public String deleteDepartmentById(int departmentId) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Department department = session.get(Department.class, departmentId);
+            if (department != null) {
+                session.delete(department);
+                transaction.commit();
+                return "Department deleted successfully.";
+            } else {
+                return "Department not found.";
+            }
+        }
+    }
+
+    @Override
+    public Department selectDepartmentById(int departmentId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Department.class, departmentId);
         }
     }
 }

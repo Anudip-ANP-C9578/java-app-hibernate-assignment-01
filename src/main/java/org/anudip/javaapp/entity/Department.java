@@ -12,6 +12,8 @@ public class Department {
         this.name = name;
         this.head = head;
     }
+ // Default constructor (required by Hibernate)
+    public Department() {}
 
     // Getters and Setters
     public int getDepartmentId() {

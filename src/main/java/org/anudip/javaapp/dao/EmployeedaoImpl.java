@@ -6,47 +6,92 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
+import java.util.HashSet;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class EmployeedaoImpl implements EmployeeDao {
 
- private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
- public EmployeedaoImpl() {
-     // Configure Hibernate session factory
-     sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
- }
+    public EmployeedaoImpl() {
+        // Configure Hibernate session factory
+        sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    }
 
- @Override
- public String insertEmployee(Employee employee) {
-     Transaction transaction = null;
-     try (Session session = sessionFactory.openSession()) {
-         transaction = session.beginTransaction();
-         session.save(employee); // Save the employee entity
-         transaction.commit();
-         return "Employee inserted successfully.";
-     } catch (Exception e) {
-         if (transaction != null) transaction.rollback();
-         e.printStackTrace();
-         return "Error inserting employee: " + e.getMessage();
-     }
- }
+    @Override
+    public String insertEmployee(Employee employee) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        session.save(employee); // Save the employee
+        transaction.commit();
+        session.close();
+        return "Employee inserted successfully.";
+    }
 
- @Override
- public String insertEmployees(HashSet<Employee> employeesSet) {
-     Transaction transaction = null;
-     try (Session session = sessionFactory.openSession()) {
-         transaction = session.beginTransaction();
-         for (Employee employee : employeesSet) {
-             session.save(employee); // Save each employee in the set
-         }
-         transaction.commit();
-         return "All employees inserted successfully.";
-     } catch (Exception e) {
-         if (transaction != null) transaction.rollback();
-         e.printStackTrace();
-         return "Error inserting employees: " + e.getMessage();
-     }
- }
+    @Override
+    public String insertEmployees(HashSet<Employee> employeesSet) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        for (Employee employee : employeesSet) {
+            session.save(employee); // Save each employee
+        }
+        transaction.commit();
+        session.close();
+        return "All employees inserted successfully.";
+    }
+
+    @Override
+    public String updateEmployeeLastName(int employeeId, String lastName) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        Employee employee = session.get(Employee.class, employeeId);
+        if (employee != null) {
+            employee.setLastName(lastName); // Update last name
+            session.update(employee);
+        }
+        transaction.commit();
+        session.close();
+        return employee != null ? "Employee last name updated successfully." : "Employee not found.";
+    }
+
+    @Override
+    public String updateEmployeeDateOfJoining(int employeeId, Calendar dateOfJoining) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        Employee employee = session.get(Employee.class, employeeId);
+        if (employee != null) {
+            employee.setDateOfJoining(dateOfJoining.getTime()); // Update date of joining
+            session.update(employee);
+        }
+        transaction.commit();
+        session.close();
+        return employee != null ? "Employee date of joining updated successfully." : "Employee not found.";
+    }
+
+    @Override
+    public String deleteEmployeeById(int employeeId) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        Employee employee = session.get(Employee.class, employeeId);
+        if (employee != null) {
+            session.delete(employee); // Delete the employee
+        }
+        transaction.commit();
+        session.close();
+        return employee != null ? "Employee deleted successfully." : "Employee not found.";
+    }
+
+    @Override
+    public Employee selectEmployeeById(int employeeId) {
+        Session session = sessionFactory.openSession();
+        Employee employee = session.get(Employee.class, employeeId); // Retrieve the employee
+        session.close();
+        return employee;
+    }
 }
