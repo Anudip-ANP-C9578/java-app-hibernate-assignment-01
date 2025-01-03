@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.anudip.java.entity.Employee" table="employees_information">
+        <id name="id" column="EmpID">
+            <generator class="assigned"/>
+        </id>
+        <property name="firstName" column="Emp_FirstName" />
+        <property name="lastName" column="Emp_LastName" />
+        <property name="dateOfJoining" column="Date_Of_joining"/>
+    </class>
+</hibernate-mapping>
